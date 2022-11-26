@@ -157,40 +157,50 @@ const App = () => {
             </tr>
           </thead>
           <tbody>
-            {currentItems?.map((employee) => (
-              <tr key={employee.id}>
-                <td>{employee?.id}</td>
-                <td>{employee.name}</td>
-                <td>{employee.department}</td>
-                <td>
-                  <InputGroup.Checkbox
-                    aria-label="Checkbox for following text input"
-                    value={employee.id}
-                    checked={employee.isChecked || false}
-                    onChange={handleCheckbox}
-                  />
-                </td>
-                <td>
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "0.5rem",
-                    }}
-                  >
-                    <Button size="sm" onClick={() => handleEdit(employee?.id)}>
-                      <BiEdit size="20px" />
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="danger"
-                      onClick={() => handleDelete(employee.id)}
+            {currentItems?.length > 0 ? (
+              currentItems?.map((employee) => (
+                <tr key={employee.id}>
+                  <td>{employee?.id}</td>
+                  <td>{employee.name}</td>
+                  <td>{employee.department}</td>
+                  <td>
+                    <InputGroup.Checkbox
+                      aria-label="Checkbox for following text input"
+                      value={employee.id}
+                      checked={employee.isChecked || false}
+                      onChange={handleCheckbox}
+                    />
+                  </td>
+                  <td>
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: "0.5rem",
+                      }}
                     >
-                      <MdDeleteOutline size="20px" />
-                    </Button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+                      <Button
+                        size="sm"
+                        onClick={() => handleEdit(employee?.id)}
+                      >
+                        <BiEdit size="20px" />
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="danger"
+                        onClick={() => handleDelete(employee.id)}
+                      >
+                        <MdDeleteOutline size="20px" />
+                      </Button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <div>
+                <h1>No Data Found</h1>
+              </div>
+            )}
+            {}
           </tbody>
         </Table>
       </div>

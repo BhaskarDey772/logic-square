@@ -13,7 +13,6 @@ const EditModal = ({
   setOpen,
   handleSave,
 }) => {
-  // create alert if any of editData field is empty
   const flag = employeeList?.some((employee) => employee?.id === editData.id);
 
   const handleAdd = () => {
@@ -28,6 +27,11 @@ const EditModal = ({
     alert("Data added successfully");
     setEditData({});
   };
+
+  const handleChange = (e) => {
+    setEditData({ ...editData, [e.target.name]: e.target.value });
+  };
+
   return (
     <div className="edit-modal" onClick={(e) => e.stopPropagation()}>
       <Modal show={open} onHide={() => setOpen(false)}>
@@ -41,10 +45,9 @@ const EditModal = ({
               aria-label="Username"
               aria-describedby="basic-addon1"
               value={editData.name}
+              name="name"
               required
-              onChange={(e) =>
-                setEditData({ ...editData, name: e.target.value })
-              }
+              onChange={handleChange}
             />
           </InputGroup>
 
@@ -53,9 +56,8 @@ const EditModal = ({
               class="form-select"
               aria-label="Default select example"
               required
-              onChange={(e) =>
-                setEditData({ ...editData, gender: e.target.value })
-              }
+              name="gender"
+              onChange={handleChange}
               value={editData?.gender}
             >
               <option selected>Open this select menu</option>
@@ -73,9 +75,8 @@ const EditModal = ({
               value={editData?.age}
               type="number"
               required
-              onChange={(e) =>
-                setEditData({ ...editData, age: e.target.value })
-              }
+              name="age"
+              onChange={handleChange}
             />
           </InputGroup>
 
@@ -84,11 +85,10 @@ const EditModal = ({
               placeholder="Designation"
               required
               aria-label="Designation"
+              name="designation"
               aria-describedby="basic-addon1"
               value={editData?.designation}
-              onChange={(e) =>
-                setEditData({ ...editData, designation: e.target.value })
-              }
+              onChange={handleChange}
             />
           </InputGroup>
 
@@ -97,11 +97,10 @@ const EditModal = ({
               placeholder="Department"
               required
               aria-label="Department"
+              name="department"
               aria-describedby="basic-addon1"
               value={editData.department}
-              onChange={(e) =>
-                setEditData({ ...editData, department: e.target.value })
-              }
+              onChange={handleChange}
             />
           </InputGroup>
 
@@ -109,13 +108,12 @@ const EditModal = ({
             <Form.Control
               placeholder="Joining Date"
               required
+              name="joiningDate"
               aria-label="Joining Date"
               aria-describedby="basic-addon1"
               value={editData.joiningDate}
               type="date"
-              onChange={(e) =>
-                setEditData({ ...editData, joiningDate: e.target.value })
-              }
+              onChange={handleChange}
             />
           </InputGroup>
         </Modal.Body>
