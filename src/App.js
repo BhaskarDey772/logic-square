@@ -21,7 +21,7 @@ const App = () => {
   const [deleteId, setDeleteId] = useState(0);
   const [initial, setInitial] = useState(true);
 
-  const itemPerPage = 10;
+  const itemPerPage = 5;
   let pages = [];
 
   const data = localStorage.getItem("employeeList");
@@ -60,10 +60,6 @@ const App = () => {
   const handleDelete = (id) => {
     setDeleteId(id);
     setDialog(true);
-    // const updatedEmployeeList = employeeList.filter(
-    //   (employee) => employee.id !== id
-    // );
-    // setEmployeeList(updatedEmployeeList);
   };
 
   const handleEdit = (id) => {
@@ -105,7 +101,6 @@ const App = () => {
     });
   };
 
-  // reverse the order of employeeList
   const updatedEmployeeList = [...employeeList].reverse();
 
   const indexOfLastItem = currentPage * itemPerPage;
