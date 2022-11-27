@@ -1,6 +1,10 @@
+// import uuid and generate uniwue id
+
+import { v4 as uuid } from "uuid";
+
 export const employees = [
   {
-    id: 1,
+    id: uuid(),
     name: "John Doe",
     gender: "Male",
     age: 35,
@@ -10,7 +14,7 @@ export const employees = [
     isChecked: false,
   },
   {
-    id: 2,
+    id: uuid(),
     name: "John Doe",
     gender: "Male",
     age: 35,

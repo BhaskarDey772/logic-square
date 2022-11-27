@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import { v4 as uuid } from "uuid";
 import { BiEdit } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 import Header from "./components/Header";
@@ -49,7 +50,7 @@ const App = () => {
   const handleCheckbox = (e) => {
     const { value, checked } = e.target;
     const updatedEmployeeList = employeeList.map((employee) => {
-      if (employee.id === parseInt(value)) {
+      if (employee.id === value) {
         employee.isChecked = checked;
       }
       return employee;
@@ -76,7 +77,7 @@ const App = () => {
       }
     }
     const updatedEmployeeList = employeeList.map((employee) => {
-      if (employee.id === parseInt(id)) {
+      if (employee.id === id) {
         employee = editData;
         setEditData({});
       }
@@ -90,7 +91,7 @@ const App = () => {
   const handleAdd = () => {
     setOpen(true);
     setEditData({
-      id: employeeList.length + 1,
+      id: uuid(),
       name: "",
       gender: "",
       age: "",
@@ -158,9 +159,9 @@ const App = () => {
           </thead>
           <tbody>
             {currentItems?.length > 0 ? (
-              currentItems?.map((employee) => (
-                <tr key={employee.id}>
-                  <td>{employee?.id}</td>
+              currentItems?.map((employee, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
                   <td>{employee.name}</td>
                   <td>{employee.department}</td>
                   <td>

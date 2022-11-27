@@ -14,7 +14,6 @@ const EditModal = ({
   handleSave,
 }) => {
   const flag = employeeList?.some((employee) => employee?.id === editData.id);
-
   const handleAdd = () => {
     for (const key in editData) {
       if (editData[key] === "") {
@@ -29,7 +28,15 @@ const EditModal = ({
   };
 
   const handleChange = (e) => {
-    setEditData({ ...editData, [e.target.name]: e.target.value });
+    setEditData({
+      ...editData,
+      [e.target.name]: e.target.value || e.target.checked,
+    });
+  };
+
+  const handleCheckbox = (e) => {
+    const { value, checked } = e.target;
+    setEditData({ ...editData, isChecked: checked });
   };
 
   return (
@@ -103,6 +110,16 @@ const EditModal = ({
               onChange={handleChange}
             />
           </InputGroup>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <InputGroup.Checkbox
+              ria-label="Checkbox for following text input"
+              name="isChecked"
+              checked={editData?.isChecked || false}
+              onChange={handleCheckbox}
+              style={{ marginBottom: "1rem" }}
+            />
+            <span>Availablity</span>
+          </div>
 
           <InputGroup className="mb-3">
             <Form.Control
